@@ -23,8 +23,8 @@ int main(int argsc, char** argsv) {
 		printf("oops, bad input. \n"); 
     exit(-1); 
 	}
-	
-	int outPtr = open(argsv[2], O_CREAT|O_EXCL|O_APPEND|S_IRWXU);
+
+	int outPtr = open(argsv[2], O_CREAT|O_EXCL|O_APPEND|O_WRONLY, 0777);
 
 	if (errno!=0)  {  
     printf("oops, file can't be already exists\n"); 
@@ -44,8 +44,11 @@ int main(int argsc, char** argsv) {
 		
 		for (int i = 0; i<strlen(buf);i++){
 			buf[i] = shifter(buf[i]);
+			
 		}
+
 		test = write(outPtr, buf, strlen(buf));
+		
 	}
 	
 }
